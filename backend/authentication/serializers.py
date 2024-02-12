@@ -19,7 +19,7 @@ class EmployeeSerializer(serializers.ModelSerializer):
 
 
 class EmployerSerializer(serializers.ModelSerializer):
-    user = UserSerializer()
+    user_credentials = UserSerializer(read_only=True, source='employer_id')
 
     class Meta:
         model = Employer
