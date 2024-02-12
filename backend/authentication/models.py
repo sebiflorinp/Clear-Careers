@@ -50,6 +50,10 @@ class Employee(models.Model):
     city = models.CharField(max_length=30, null=False, blank=False)
     description = models.CharField(max_length=1000, null=False, blank=False)
 
+    @property
+    def education(self):
+        return self.education_set.all()
+
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
 

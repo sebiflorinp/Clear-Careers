@@ -1,6 +1,7 @@
 from djoser.serializers import UserCreateSerializer
 from .models import User, Employee, Employer
 from rest_framework import serializers
+from education.serializers import EducationSerializer
 
 
 class UserSerializer(UserCreateSerializer):
@@ -12,10 +13,12 @@ class UserSerializer(UserCreateSerializer):
 
 class EmployeeSerializer(serializers.ModelSerializer):
     user_credentials = UserSerializer(read_only=True, source='employee_id')
+    education = EducationSerializer(read_only=True, many=True)
 
     class Meta:
         model = Employee
-        fields = '__all__'
+        fields = ['employee_id', 'user_credentials', 'phone_number', 'first_name', 'last_name', 'birthdate', 'country', 'city',
+                  'description', 'education']
 
 
 class EmployerSerializer(serializers.ModelSerializer):
