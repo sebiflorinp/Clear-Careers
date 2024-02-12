@@ -23,7 +23,7 @@ class UserManager(BaseUserManager):
 
 
 class User(AbstractBaseUser):
-    id = models.AutoField(primary_key=True)
+    user_id = models.AutoField(primary_key=True)
     email = models.EmailField(max_length=200, unique=True, blank=False, null=False)
     is_employer = models.BooleanField(default=False, blank=False, null=False)
     is_employee = models.BooleanField(default=False, blank=False, null=False)
@@ -32,7 +32,7 @@ class User(AbstractBaseUser):
     is_superuser = models.BooleanField(default=False)
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['is_employer', 'is_employee']
+    REQUIRED_FIELDS = ['is_employer', 'is_employee', 'password']
 
     objects = UserManager()
 
@@ -41,12 +41,11 @@ class User(AbstractBaseUser):
 
 
 class Employee(models.Model):
-    id = models.AutoField(primary_key=True)
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    employee_id = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     phone_number = models.CharField(max_length=20, null=False, blank=False)
     first_name = models.CharField(max_length=30, null=False, blank=False)
     last_name = models.CharField(max_length=30, null=False, blank=False)
-    birthday = models.DateField(null=False, blank=False)
+    birthdate = models.DateField(null=False, blank=False)
     country = models.CharField(max_length=30, null=False, blank=False)
     city = models.CharField(max_length=30, null=False, blank=False)
     description = models.CharField(max_length=1000, null=False, blank=False)
@@ -56,8 +55,7 @@ class Employee(models.Model):
 
 
 class Employer(models.Model):
-    id = models.AutoField(primary_key=True)
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    employer_id = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     phone_number = models.CharField(max_length=20, null=False, blank=False)
     website_link = models.CharField(max_length=100, null=False, blank=True, default="")
     company_name = models.CharField(max_length=100, null=False, blank=False, unique=True)
