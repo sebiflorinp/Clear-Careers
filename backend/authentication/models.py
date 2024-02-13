@@ -1,5 +1,4 @@
 from django.db import models
-
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 
 
@@ -53,6 +52,10 @@ class Employee(models.Model):
     @property
     def education(self):
         return self.education_set.all()
+
+    @property
+    def experience(self):
+        return self.experience_set.all()
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
