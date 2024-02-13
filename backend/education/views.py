@@ -53,3 +53,18 @@ class UpdateDeleteEducation(APIView):
                 return Response(updated_education.errors, status=status.HTTP_400_BAD_REQUEST)
         except Education.DoesNotExist:
             return Response(status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, *args, **kwargs):
+        # Check if the education with the input id exists
+        try:
+            # Get the education that will be deleted
+            education = (Education.objects
+                         .filter(employee_id=kwargs.get('employee_id'))
+                         .get(education_id=kwargs.get('education_id')))
+            # Check permissions
+            self.check_object_permissions(request, education)
+            # delete the education
+            education.delete()
+            return Response(status=status.HTTP_204_NO_CONTENT)
+        except Education.DoesNotExist:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
