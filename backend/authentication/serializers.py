@@ -7,8 +7,8 @@ from education.serializers import EducationSerializer
 class UserSerializer(UserCreateSerializer):
     class Meta(UserCreateSerializer.Meta):
         model = User
-        fields = ['user_id', 'email', 'password', 'is_employee', 'is_employer']
-        read_only_fields = ['user_id', 'email', 'password', 'is_employee', 'is_employer']
+        fields = ['id', 'email', 'password', 'is_employee', 'is_employer']
+        read_only_fields = ['id', 'email', 'password', 'is_employee', 'is_employer']
 
 
 class EmployeeSerializer(serializers.ModelSerializer):

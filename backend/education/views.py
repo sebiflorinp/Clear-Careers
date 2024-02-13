@@ -4,10 +4,15 @@ from .serializers import EducationSerializer
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-
+from rest_framework.permissions import IsAuthenticated
+from rest_framework_simplejwt.authentication import JWTAuthentication
+from .permissions import IsEducationOwner
 
 
 class CreateEducation(APIView):
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticated]
+
     def post(self, request, *args, **kwargs):
         # Check if the employer_id is valid
         try:
@@ -26,11 +31,20 @@ class CreateEducation(APIView):
 
 
 class UpdateDeleteEducation(APIView):
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsEducationOwner, IsAuthenticated]
+
     def put(self, request, *args, **kwargs):
         # Check if the education with the input id exists
         try:
-            education = Education.objects.get(education_id=kwargs.get('education_id'))
-
+            # Get the education that will be updated
+            education = (Education.objects
+                         .filter(employee_id=kwargs.get('employee_id'))
+                         .get(education_id=kwargs.get('education_id'))
+                         )
+            # Check permissions
+            self.check_object_permissions(request, education)
+            # Perform the update
             updated_education = EducationSerializer(education, data=request.data)
             if updated_education.is_valid():
                 updated_education.save()

@@ -23,7 +23,7 @@ class UserManager(BaseUserManager):
 
 
 class User(AbstractBaseUser):
-    user_id = models.AutoField(primary_key=True)
+    id = models.AutoField(primary_key=True)
     email = models.EmailField(max_length=200, unique=True, blank=False, null=False)
     is_employer = models.BooleanField(default=False, blank=False, null=False)
     is_employee = models.BooleanField(default=False, blank=False, null=False)
