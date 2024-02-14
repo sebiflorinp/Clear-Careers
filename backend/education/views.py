@@ -11,17 +11,22 @@ from .permissions import IsEducationOwner
 
 class CreateEducation(APIView):
     authentication_classes = [JWTAuthentication]
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, IsEducationOwner]
 
     def post(self, request, *args, **kwargs):
         # Check if the employer_id is valid
         try:
             employee_id = kwargs.get('employee_id')
             employee = Employee.objects.get(employee_id=employee_id)
+            # Check if the employee_id matches between the request and endpoint
+            if request.data['employee_id'] != employee_id:
+                return Response(status=status.HTTP_400_BAD_REQUEST)
             # Create the instance
             request.data['employee_id'] = employee_id
             education = EducationSerializer(data=request.data)
             if education.is_valid():
+                # Check permissions
+                self.check_object_permissions(request, education)
                 education.save()
                 return Response(education.data)
             else:
