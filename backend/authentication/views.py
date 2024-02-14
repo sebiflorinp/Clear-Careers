@@ -30,7 +30,6 @@ class CreateListEmployees(APIView):
             request.data['employee_id'] = request.data['id']
             request.data['user'] = user_data.data
             employee = EmployeeSerializer(data=request.data)
-
             if employee.is_valid():
                 employee.save()
                 return Response(employee.data, status=status.HTTP_201_CREATED)
@@ -40,7 +39,7 @@ class CreateListEmployees(APIView):
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
-class RetrieveUpdateDeleteEmployees(APIView):
+class RetrieveUpdateEmployees(APIView):
     authentication_classes = [JWTAuthentication]
     permission_classes = [IsEmployeeAccountOwner, IsAuthenticated]
 
@@ -100,7 +99,7 @@ class CreateListEmployers(APIView):
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
-class RetrieveUpdateDeleteEmployers(APIView):
+class RetrieveUpdateEmployers(APIView):
     authentication_classes = [JWTAuthentication]
     permission_classes = [IsEmployerAccountOwner, IsAuthenticated]
 
