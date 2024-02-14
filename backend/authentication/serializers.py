@@ -3,6 +3,7 @@ from .models import User, Employee, Employer
 from rest_framework import serializers
 from education.serializers import EducationSerializer
 from experience.serializers import ExperienceSerializer
+from location.serializers import LocationSerializer
 
 
 class UserSerializer(UserCreateSerializer):
@@ -19,13 +20,14 @@ class EmployeeSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Employee
-        fields = ['employee_id', 'user_credentials', 'phone_number', 'first_name', 'last_name', 'birthdate', 'country', 'city',
-                  'description', 'education', 'experience']
+        fields = ['employee_id', 'user_credentials', 'phone_number', 'first_name', 'last_name', 'birthdate', 'country',
+                  'city', 'description', 'education', 'experience']
 
 
 class EmployerSerializer(serializers.ModelSerializer):
     user_credentials = UserSerializer(read_only=True, source='employer_id')
+    locations = LocationSerializer(read_only=True, many=True)
 
     class Meta:
         model = Employer
-        fields = '__all__'
+        fields = ['employer_id', 'user_credentials', 'phone_number', 'website_link', 'company_name', 'industry', 'description', 'locations']
