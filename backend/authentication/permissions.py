@@ -7,6 +7,7 @@ class IsEmployeeAccountOwner(BasePermission):
     def has_object_permission(self, request, view, employee):
         if request.method == 'GET' or request.method == 'POST':
             return True
+
         if request.method == 'PUT':
             user_id = get_user_id_from_request(request)
             employee_data = EmployeeSerializer(employee).data
@@ -20,6 +21,7 @@ class IsEmployerAccountOwner(BasePermission):
     def has_object_permission(self, request, view, employer):
         if request.method == 'GET' or request.method == 'POST':
             return True
+
         if request.method == 'PUT':
             user_id = get_user_id_from_request(request)
             employer_data = EmployerSerializer(employer).data

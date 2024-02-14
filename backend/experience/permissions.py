@@ -7,6 +7,7 @@ class IsExperienceOwner(BasePermission):
     def has_object_permission(self, request, view, experience):
         # Get the id of the authenticated user
         user_id = get_user_id_from_request(request)
+
         if request.method == 'GET':
             return True
 

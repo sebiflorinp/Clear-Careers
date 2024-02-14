@@ -57,7 +57,7 @@ class UpdateDeleteExperience(APIView):
                 updated_experience.save()
                 return Response(updated_experience.data)
             else:
-                return Response(status=status.HTTP_400_BAD_REQUEST)
+                return Response(updated_experience.errors, status=status.HTTP_400_BAD_REQUEST)
         except Experience.DoesNotExist:
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
