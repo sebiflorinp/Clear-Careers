@@ -73,5 +73,9 @@ class Employer(models.Model):
     def locations(self):
         return self.location_set.all()
 
+    @property
+    def postings(self):
+        return self.posting_set.all()
+
     def __str__(self):
         return f"{self.company_name}"

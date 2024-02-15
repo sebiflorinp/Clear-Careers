@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'education',
     'experience',
     'location',
+    'posting',
 
     'rest_framework',
     'rest_framework.authtoken',
