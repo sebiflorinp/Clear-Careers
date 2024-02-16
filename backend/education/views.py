@@ -10,6 +10,7 @@ from .permissions import IsEducationOwner
 
 
 class CreateEducation(APIView):
+    serializer_class = EducationSerializer
     authentication_classes = [JWTAuthentication]
     permission_classes = [IsAuthenticated, IsEducationOwner]
 
@@ -36,6 +37,7 @@ class CreateEducation(APIView):
 
 
 class UpdateDeleteEducation(APIView):
+    serializer_class = EducationSerializer
     authentication_classes = [JWTAuthentication]
     permission_classes = [IsEducationOwner, IsAuthenticated]
 

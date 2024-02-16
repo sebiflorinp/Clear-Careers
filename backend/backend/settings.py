@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'djoser',
+    'drf_spectacular'
 ]
 
 MIDDLEWARE = [
@@ -103,11 +104,19 @@ EMAIL_USE_TLS = True
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
-    )
+    ),
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema'
 }
 
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Clear Careers API',
+    'DESCRIPTION': 'A job searching application.',
+    'VERSION': '1.0.0',
+    'SERVE_INCLUDE_SCHEMA': False,
+
+}
 SIMPLE_JWT = {
-    'AUTH_HEADER_TYPES': ('Bearer', 'Token',),
+    'AUTH_HEADER_TYPES': ('Bearer',),
 }
 
 
@@ -161,8 +170,8 @@ DJOSER = {
     'SEND_ACTIVATION_EMAIL': True,
     'ACTIVATION_URL': 'activate/{uid}/{token}',
     'SERIALIZERS': {
-        'user': 'authentication.serializers.UserSerializer',
-        'user.create': 'authentication.serializers.UserSerializer',
+        'user': 'authentication.serializers.UserCredentialsSerializer',
+        'user.create': 'authentication.serializers.UserCredentialsSerializer',
         'user_delete': 'djoser.serializers.UserDeleteSerializer',
     }
 }

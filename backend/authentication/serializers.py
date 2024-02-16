@@ -7,7 +7,7 @@ from location.serializers import LocationSerializer
 from posting.serializers import PostingSerializer
 
 
-class UserSerializer(UserCreateSerializer):
+class UserCredentialsSerializer(UserCreateSerializer):
     class Meta(UserCreateSerializer.Meta):
         model = User
         fields = ['id', 'email', 'password', 'is_employee', 'is_employer']
@@ -15,7 +15,7 @@ class UserSerializer(UserCreateSerializer):
 
 
 class EmployeeSerializer(serializers.ModelSerializer):
-    user_credentials = UserSerializer(read_only=True, source='employee_id')
+    user_credentials = UserCredentialsSerializer(read_only=True, source='employee_id')
     education = EducationSerializer(read_only=True, many=True)
     experience = ExperienceSerializer(read_only=True, many=True)
 
@@ -26,7 +26,7 @@ class EmployeeSerializer(serializers.ModelSerializer):
 
 
 class EmployerSerializer(serializers.ModelSerializer):
-    user_credentials = UserSerializer(read_only=True, source='employer_id')
+    user_credentials = UserCredentialsSerializer(read_only=True, source='employer_id')
     locations = LocationSerializer(read_only=True, many=True)
     postings = PostingSerializer(read_only=True, many=True)
 

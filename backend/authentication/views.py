@@ -1,5 +1,5 @@
 from .models import Employer, Employee, User
-from .serializers import EmployerSerializer, EmployeeSerializer, UserSerializer
+from .serializers import EmployerSerializer, EmployeeSerializer, UserCredentialsSerializer
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
@@ -9,6 +9,8 @@ from rest_framework.permissions import IsAuthenticated
 
 
 class CreateListEmployees(APIView):
+    serializer_class = EmployeeSerializer
+
     def get(self, request, *args, **kwargs):
         employees = Employee.objects.all()
         serializer = EmployeeSerializer(employees, many=True)
@@ -20,7 +22,7 @@ class CreateListEmployees(APIView):
             # check if is_employee is True and is_employer False
             if not user.is_employee or user.is_employer:
                 return Response(status=status.HTTP_400_BAD_REQUEST)
-            user_data = UserSerializer(user)
+            user_data = UserCredentialsSerializer(user)
             # if there is already an employee or employer created with the received credentials return a 400
             employees = Employee.objects.filter(employee_id=request.data['id'])
             employers = Employer.objects.filter(employer_id=request.data['id'])
@@ -40,6 +42,7 @@ class CreateListEmployees(APIView):
 
 
 class RetrieveUpdateEmployees(APIView):
+    serializer_class = EmployeeSerializer
     authentication_classes = [JWTAuthentication]
     permission_classes = [IsEmployeeAccountOwner, IsAuthenticated]
 
@@ -69,6 +72,8 @@ class RetrieveUpdateEmployees(APIView):
 
 
 class CreateListEmployers(APIView):
+    serializer_class = EmployerSerializer
+
     def get(self, request, *args, **kwargs):
         employers = Employer.objects.all()
         serializer = EmployerSerializer(employers, many=True)
@@ -80,7 +85,7 @@ class CreateListEmployers(APIView):
             # check if the credentials has is_employer is True and is_employee False
             if user.is_employee or not user.is_employer:
                 return Response(status=status.HTTP_400_BAD_REQUEST)
-            user_data = UserSerializer(user)
+            user_data = UserCredentialsSerializer(user)
             # check if the received credentials have an employee / employer account already associated with
             employees = Employee.objects.filter(employee_id=request.data['id'])
             employers = Employer.objects.filter(employer_id=request.data['id'])
@@ -100,6 +105,7 @@ class CreateListEmployers(APIView):
 
 
 class RetrieveUpdateEmployers(APIView):
+    serializer_class = EmployeeSerializer
     authentication_classes = [JWTAuthentication]
     permission_classes = [IsEmployerAccountOwner, IsAuthenticated]
 

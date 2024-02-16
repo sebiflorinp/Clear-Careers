@@ -9,6 +9,8 @@ from rest_framework.permissions import IsAuthenticated
 
 
 class ListPostings(APIView):
+    serializer_class = PostingSerializer
+
     def get(self, request, *args, **kwargs):
         postings = Posting.objects.all()
         serializer = PostingSerializer(postings, many=True)
@@ -16,6 +18,7 @@ class ListPostings(APIView):
 
 
 class CreatePostings(APIView):
+    serializer_class = PostingSerializer
     authentication_classes = [JWTAuthentication]
     permission_classes = [IsAuthenticated, IsPostingOwner]
 
@@ -35,6 +38,7 @@ class CreatePostings(APIView):
 
 
 class UpdateDeletePostings(APIView):
+    serializer_class = PostingSerializer
     authentication_classes = [JWTAuthentication]
     permission_classes = [IsAuthenticated, IsPostingOwner]
 

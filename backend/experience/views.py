@@ -10,6 +10,7 @@ from rest_framework import status
 
 
 class CreateExperience(APIView):
+    serializer_class = ExperienceSerializer
     authentication_classes = [JWTAuthentication]
     permission_classes = [IsAuthenticated, IsExperienceOwner]
 
@@ -35,6 +36,7 @@ class CreateExperience(APIView):
 
 
 class UpdateDeleteExperience(APIView):
+    serializer_class = ExperienceSerializer
     authentication_classes = [JWTAuthentication]
     permission_classes = [IsAuthenticated, IsExperienceOwner]
 

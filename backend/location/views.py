@@ -10,6 +10,7 @@ from .serializers import LocationSerializer
 
 
 class CreateLocations(APIView):
+    serializer_class = LocationSerializer
     authentication_classes = [JWTAuthentication]
     permission_classes = [IsAuthenticated, IsLocationOwner]
 
@@ -40,6 +41,7 @@ class CreateLocations(APIView):
 
 
 class UpdateDeleteLocations(APIView):
+    serializer_class = LocationSerializer
     authentication_classes = [JWTAuthentication]
     permission_classes = [IsAuthenticated, IsLocationOwner]
 
