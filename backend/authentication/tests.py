@@ -1,4 +1,4 @@
-from rest_framework.test import APITestCase, APIClient
+from rest_framework.test import APITestCase
 from .models import User, Employee, Employer
 from .serializers import UserCreateSerializer, EmployeeSerializer
 from rest_framework_simplejwt.tokens import AccessToken
@@ -6,7 +6,7 @@ from django.urls import reverse
 from rest_framework import status
 
 
-class CreateListEmployeesTest(APITestCase):
+class TestCreateListEmployees(APITestCase):
     def setUp(self):
         self.url = reverse('create-list-employees')
 
@@ -85,7 +85,7 @@ class CreateListEmployeesTest(APITestCase):
         self.assertEqual(serializer.data, response.data)
 
 
-class RetrieveUpdateEmployeesTest(APITestCase):
+class TestRetrieveUpdateEmployees(APITestCase):
     def setUp(self):
         self.update_url = reverse('retrieve-update-delete-employees', kwargs={"employee_id": 1})
         self.user1 = User.objects.create(
@@ -169,6 +169,8 @@ class RetrieveUpdateEmployeesTest(APITestCase):
         response = self.client.get(url)
 
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+
 
 
 

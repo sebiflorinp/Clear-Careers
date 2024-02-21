@@ -15,7 +15,7 @@ employee_patterns = [
 employer_patterns = [
     path('employers/', CreateListEmployers.as_view(), name='create-list-employers'),
     path('employers/<int:employer_id>', RetrieveUpdateEmployers.as_view(),
-         name='retrieve-update-delete-employers')
+         name='retrieve-update-employers')
 ]
 
 urlpatterns = djoser_patterns + employee_patterns + employer_patterns
