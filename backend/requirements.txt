@@ -2,3 +2,4 @@ Django==5.0.2
 djangorestframework==3.14.0
 djoser==2.2.2
 PyJWT==2.4.0
+gunicorn==21.2.0
