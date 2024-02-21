@@ -9,6 +9,10 @@ Clear Careers is a job finding application which is in development. It's goal is
 
 **Server:** Django, Django-Rest-Framework
 
+## Tests
+
+![Coverage ](https://github.com/sebiflorinp/Clear-Careers/blob/main/backend/coverage.svg)
+
 ## Commits
 
 ![GitHub last commit](https://img.shields.io/github/last-commit/sebiflorinp/Clear-Careers?display_timestamp=committer&style=flat)
