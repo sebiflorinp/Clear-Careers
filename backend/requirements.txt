@@ -3,4 +3,4 @@ djangorestframework==3.14.0
 djoser==2.2.2
 PyJWT==2.4.0
 gunicorn==21.2.0
-dj_database_url==2.4.0
+dj_database_url==2.1.0
