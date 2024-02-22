@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.1.0
 info:
   title: Clear Careers API
   version: 1.0.0
@@ -6,12 +6,12 @@ info:
 paths:
   /api/v1/auth/jwt/create/:
     post:
-      operationId: auth_jwt_create_create
+      operationId: v1_auth_jwt_create_create
       description: |-
         Takes a set of user credentials and returns an access and refresh JSON web
         token pair to prove the authentication of those credentials.
       tags:
-      - auth
+      - v1
       requestBody:
         content:
           application/json:
@@ -33,12 +33,12 @@ paths:
           description: ''
   /api/v1/auth/jwt/refresh/:
     post:
-      operationId: auth_jwt_refresh_create
+      operationId: v1_auth_jwt_refresh_create
       description: |-
         Takes a refresh type JSON web token and returns an access type JSON web
         token if the refresh token is valid.
       tags:
-      - auth
+      - v1
       requestBody:
         content:
           application/json:
@@ -60,12 +60,12 @@ paths:
           description: ''
   /api/v1/auth/jwt/verify/:
     post:
-      operationId: auth_jwt_verify_create
+      operationId: v1_auth_jwt_verify_create
       description: |-
         Takes a token and indicates if it is valid.  This view provides no
         information about a token's fitness for a particular use.
       tags:
-      - auth
+      - v1
       requestBody:
         content:
           application/json:
@@ -87,9 +87,9 @@ paths:
           description: ''
   /api/v1/auth/users/:
     get:
-      operationId: auth_users_list
+      operationId: v1_auth_users_list
       tags:
-      - auth
+      - v1
       security:
       - jwtAuth: []
       responses:
@@ -102,9 +102,9 @@ paths:
                   $ref: '#/components/schemas/UserCredentials'
           description: ''
     post:
-      operationId: auth_users_create
+      operationId: v1_auth_users_create
       tags:
-      - auth
+      - v1
       requestBody:
         content:
           application/json:
@@ -129,7 +129,7 @@ paths:
           description: ''
   /api/v1/auth/users/{id}/:
     get:
-      operationId: auth_users_retrieve
+      operationId: v1_auth_users_retrieve
       parameters:
       - in: path
         name: id
@@ -138,7 +138,7 @@ paths:
         description: A unique integer value identifying this user.
         required: true
       tags:
-      - auth
+      - v1
       security:
       - jwtAuth: []
       responses:
@@ -149,7 +149,7 @@ paths:
                 $ref: '#/components/schemas/UserCredentials'
           description: ''
     put:
-      operationId: auth_users_update
+      operationId: v1_auth_users_update
       parameters:
       - in: path
         name: id
@@ -158,7 +158,7 @@ paths:
         description: A unique integer value identifying this user.
         required: true
       tags:
-      - auth
+      - v1
       requestBody:
         content:
           application/json:
@@ -181,7 +181,7 @@ paths:
                 $ref: '#/components/schemas/UserCredentials'
           description: ''
     patch:
-      operationId: auth_users_partial_update
+      operationId: v1_auth_users_partial_update
       parameters:
       - in: path
         name: id
@@ -190,7 +190,7 @@ paths:
         description: A unique integer value identifying this user.
         required: true
       tags:
-      - auth
+      - v1
       requestBody:
         content:
           application/json:
@@ -212,7 +212,7 @@ paths:
                 $ref: '#/components/schemas/UserCredentials'
           description: ''
     delete:
-      operationId: auth_users_destroy
+      operationId: v1_auth_users_destroy
       parameters:
       - in: path
         name: id
@@ -221,7 +221,7 @@ paths:
         description: A unique integer value identifying this user.
         required: true
       tags:
-      - auth
+      - v1
       security:
       - jwtAuth: []
       responses:
@@ -229,9 +229,9 @@ paths:
           description: No response body
   /api/v1/auth/users/activation/:
     post:
-      operationId: auth_users_activation_create
+      operationId: v1_auth_users_activation_create
       tags:
-      - auth
+      - v1
       requestBody:
         content:
           application/json:
@@ -256,9 +256,9 @@ paths:
           description: ''
   /api/v1/auth/users/me/:
     get:
-      operationId: auth_users_me_retrieve
+      operationId: v1_auth_users_me_retrieve
       tags:
-      - auth
+      - v1
       security:
       - jwtAuth: []
       responses:
@@ -269,9 +269,9 @@ paths:
                 $ref: '#/components/schemas/User'
           description: ''
     put:
-      operationId: auth_users_me_update
+      operationId: v1_auth_users_me_update
       tags:
-      - auth
+      - v1
       requestBody:
         content:
           application/json:
@@ -294,9 +294,9 @@ paths:
                 $ref: '#/components/schemas/User'
           description: ''
     patch:
-      operationId: auth_users_me_partial_update
+      operationId: v1_auth_users_me_partial_update
       tags:
-      - auth
+      - v1
       requestBody:
         content:
           application/json:
@@ -318,9 +318,9 @@ paths:
                 $ref: '#/components/schemas/User'
           description: ''
     delete:
-      operationId: auth_users_me_destroy
+      operationId: v1_auth_users_me_destroy
       tags:
-      - auth
+      - v1
       security:
       - jwtAuth: []
       responses:
@@ -328,9 +328,9 @@ paths:
           description: No response body
   /api/v1/auth/users/resend_activation/:
     post:
-      operationId: auth_users_resend_activation_create
+      operationId: v1_auth_users_resend_activation_create
       tags:
-      - auth
+      - v1
       requestBody:
         content:
           application/json:
@@ -355,9 +355,9 @@ paths:
           description: ''
   /api/v1/auth/users/reset_email/:
     post:
-      operationId: auth_users_reset_email_create
+      operationId: v1_auth_users_reset_email_create
       tags:
-      - auth
+      - v1
       requestBody:
         content:
           application/json:
@@ -382,9 +382,9 @@ paths:
           description: ''
   /api/v1/auth/users/reset_email_confirm/:
     post:
-      operationId: auth_users_reset_email_confirm_create
+      operationId: v1_auth_users_reset_email_confirm_create
       tags:
-      - auth
+      - v1
       requestBody:
         content:
           application/json:
@@ -409,9 +409,9 @@ paths:
           description: ''
   /api/v1/auth/users/reset_password/:
     post:
-      operationId: auth_users_reset_password_create
+      operationId: v1_auth_users_reset_password_create
       tags:
-      - auth
+      - v1
       requestBody:
         content:
           application/json:
@@ -436,9 +436,9 @@ paths:
           description: ''
   /api/v1/auth/users/reset_password_confirm/:
     post:
-      operationId: auth_users_reset_password_confirm_create
+      operationId: v1_auth_users_reset_password_confirm_create
       tags:
-      - auth
+      - v1
       requestBody:
         content:
           application/json:
@@ -463,9 +463,9 @@ paths:
           description: ''
   /api/v1/auth/users/set_email/:
     post:
-      operationId: auth_users_set_email_create
+      operationId: v1_auth_users_set_email_create
       tags:
-      - auth
+      - v1
       requestBody:
         content:
           application/json:
@@ -489,9 +489,9 @@ paths:
           description: ''
   /api/v1/auth/users/set_password/:
     post:
-      operationId: auth_users_set_password_create
+      operationId: v1_auth_users_set_password_create
       tags:
-      - auth
+      - v1
       requestBody:
         content:
           application/json:
@@ -515,7 +515,7 @@ paths:
           description: ''
   /api/v1/employee/{employee_id}/education/:
     post:
-      operationId: employee_education_create
+      operationId: v1_employee_education_create
       parameters:
       - in: path
         name: employee_id
@@ -523,7 +523,7 @@ paths:
           type: integer
         required: true
       tags:
-      - employee
+      - v1
       requestBody:
         content:
           application/json:
@@ -547,7 +547,7 @@ paths:
           description: ''
   /api/v1/employee/{employee_id}/education/{education_id}:
     put:
-      operationId: employee_education_update
+      operationId: v1_employee_education_update
       parameters:
       - in: path
         name: education_id
@@ -560,7 +560,7 @@ paths:
           type: integer
         required: true
       tags:
-      - employee
+      - v1
       requestBody:
         content:
           application/json:
@@ -583,7 +583,7 @@ paths:
                 $ref: '#/components/schemas/Education'
           description: ''
     delete:
-      operationId: employee_education_destroy
+      operationId: v1_employee_education_destroy
       parameters:
       - in: path
         name: education_id
@@ -596,7 +596,7 @@ paths:
           type: integer
         required: true
       tags:
-      - employee
+      - v1
       security:
       - jwtAuth: []
       responses:
@@ -604,9 +604,9 @@ paths:
           description: No response body
   /api/v1/employees/:
     get:
-      operationId: employees_retrieve
+      operationId: v1_employees_retrieve
       tags:
-      - employees
+      - v1
       security:
       - jwtAuth: []
       - {}
@@ -618,9 +618,9 @@ paths:
                 $ref: '#/components/schemas/Employee'
           description: ''
     post:
-      operationId: employees_create
+      operationId: v1_employees_create
       tags:
-      - employees
+      - v1
       requestBody:
         content:
           application/json:
@@ -645,7 +645,7 @@ paths:
           description: ''
   /api/v1/employees/{employee_id}:
     get:
-      operationId: employees_retrieve_2
+      operationId: v1_employees_retrieve_2
       parameters:
       - in: path
         name: employee_id
@@ -653,7 +653,7 @@ paths:
           type: integer
         required: true
       tags:
-      - employees
+      - v1
       security:
       - jwtAuth: []
       responses:
@@ -664,7 +664,7 @@ paths:
                 $ref: '#/components/schemas/Employee'
           description: ''
     put:
-      operationId: employees_update
+      operationId: v1_employees_update
       parameters:
       - in: path
         name: employee_id
@@ -672,7 +672,7 @@ paths:
           type: integer
         required: true
       tags:
-      - employees
+      - v1
       requestBody:
         content:
           application/json:
@@ -696,7 +696,7 @@ paths:
           description: ''
   /api/v1/employees/{employee_id}/experiences/:
     post:
-      operationId: employees_experiences_create
+      operationId: v1_employees_experiences_create
       parameters:
       - in: path
         name: employee_id
@@ -704,7 +704,7 @@ paths:
           type: integer
         required: true
       tags:
-      - employees
+      - v1
       requestBody:
         content:
           application/json:
@@ -728,7 +728,7 @@ paths:
           description: ''
   /api/v1/employees/{employee_id}/experiences/{experience_id}:
     put:
-      operationId: employees_experiences_update
+      operationId: v1_employees_experiences_update
       parameters:
       - in: path
         name: employee_id
@@ -741,7 +741,7 @@ paths:
           type: integer
         required: true
       tags:
-      - employees
+      - v1
       requestBody:
         content:
           application/json:
@@ -764,7 +764,7 @@ paths:
                 $ref: '#/components/schemas/Experience'
           description: ''
     delete:
-      operationId: employees_experiences_destroy
+      operationId: v1_employees_experiences_destroy
       parameters:
       - in: path
         name: employee_id
@@ -777,7 +777,7 @@ paths:
           type: integer
         required: true
       tags:
-      - employees
+      - v1
       security:
       - jwtAuth: []
       responses:
@@ -785,7 +785,7 @@ paths:
           description: No response body
   /api/v1/employer/{employer_id}/locations/:
     post:
-      operationId: employer_locations_create
+      operationId: v1_employer_locations_create
       parameters:
       - in: path
         name: employer_id
@@ -793,7 +793,7 @@ paths:
           type: integer
         required: true
       tags:
-      - employer
+      - v1
       requestBody:
         content:
           application/json:
@@ -817,7 +817,7 @@ paths:
           description: ''
   /api/v1/employer/{employer_id}/locations/{location_id}:
     put:
-      operationId: employer_locations_update
+      operationId: v1_employer_locations_update
       parameters:
       - in: path
         name: employer_id
@@ -830,7 +830,7 @@ paths:
           type: integer
         required: true
       tags:
-      - employer
+      - v1
       requestBody:
         content:
           application/json:
@@ -853,7 +853,7 @@ paths:
                 $ref: '#/components/schemas/Location'
           description: ''
     delete:
-      operationId: employer_locations_destroy
+      operationId: v1_employer_locations_destroy
       parameters:
       - in: path
         name: employer_id
@@ -866,7 +866,7 @@ paths:
           type: integer
         required: true
       tags:
-      - employer
+      - v1
       security:
       - jwtAuth: []
       responses:
@@ -874,9 +874,9 @@ paths:
           description: No response body
   /api/v1/employers/:
     get:
-      operationId: employers_retrieve
+      operationId: v1_employers_retrieve
       tags:
-      - employers
+      - v1
       security:
       - jwtAuth: []
       - {}
@@ -888,9 +888,9 @@ paths:
                 $ref: '#/components/schemas/Employer'
           description: ''
     post:
-      operationId: employers_create
+      operationId: v1_employers_create
       tags:
-      - employers
+      - v1
       requestBody:
         content:
           application/json:
@@ -915,7 +915,7 @@ paths:
           description: ''
   /api/v1/employers/{employer_id}:
     get:
-      operationId: employers_retrieve_2
+      operationId: v1_employers_retrieve_2
       parameters:
       - in: path
         name: employer_id
@@ -923,7 +923,7 @@ paths:
           type: integer
         required: true
       tags:
-      - employers
+      - v1
       security:
       - jwtAuth: []
       responses:
@@ -934,7 +934,7 @@ paths:
                 $ref: '#/components/schemas/Employee'
           description: ''
     put:
-      operationId: employers_update
+      operationId: v1_employers_update
       parameters:
       - in: path
         name: employer_id
@@ -942,7 +942,7 @@ paths:
           type: integer
         required: true
       tags:
-      - employers
+      - v1
       requestBody:
         content:
           application/json:
@@ -966,7 +966,7 @@ paths:
           description: ''
   /api/v1/employers/{employer_id}/postings/:
     post:
-      operationId: employers_postings_create
+      operationId: v1_employers_postings_create
       parameters:
       - in: path
         name: employer_id
@@ -974,7 +974,7 @@ paths:
           type: integer
         required: true
       tags:
-      - employers
+      - v1
       requestBody:
         content:
           application/json:
@@ -998,7 +998,7 @@ paths:
           description: ''
   /api/v1/employers/{employer_id}/postings/{posting_id}:
     put:
-      operationId: employers_postings_update
+      operationId: v1_employers_postings_update
       parameters:
       - in: path
         name: employer_id
@@ -1011,7 +1011,7 @@ paths:
           type: integer
         required: true
       tags:
-      - employers
+      - v1
       requestBody:
         content:
           application/json:
@@ -1034,7 +1034,7 @@ paths:
                 $ref: '#/components/schemas/Posting'
           description: ''
     delete:
-      operationId: employers_postings_destroy
+      operationId: v1_employers_postings_destroy
       parameters:
       - in: path
         name: employer_id
@@ -1047,7 +1047,7 @@ paths:
           type: integer
         required: true
       tags:
-      - employers
+      - v1
       security:
       - jwtAuth: []
       responses:
@@ -1055,9 +1055,9 @@ paths:
           description: No response body
   /api/v1/postings/:
     get:
-      operationId: postings_retrieve
+      operationId: v1_postings_retrieve
       tags:
-      - postings
+      - v1
       security:
       - jwtAuth: []
       - {}
