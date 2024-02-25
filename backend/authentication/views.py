@@ -5,7 +5,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from .permissions import IsEmployeeAccountOwner, IsEmployerAccountOwner
 from rest_framework_simplejwt.authentication import JWTAuthentication
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, AllowAny
 
 
 class CreateListEmployees(APIView):
@@ -107,7 +107,13 @@ class CreateListEmployers(APIView):
 class RetrieveUpdateEmployers(APIView):
     serializer_class = EmployeeSerializer
     authentication_classes = [JWTAuthentication]
-    permission_classes = [IsEmployerAccountOwner, IsAuthenticated]
+
+    def get_permissions(self):
+        if self.request.method == 'GET':
+            permission_classes = [AllowAny]
+        else:
+            permission_classes = [IsEmployerAccountOwner, IsAuthenticated]
+        return [permission() for permission in permission_classes]
 
     def get(self, request, *args, **kwargs):
         try:
