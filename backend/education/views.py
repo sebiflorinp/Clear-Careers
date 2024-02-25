@@ -20,10 +20,9 @@ class CreateEducation(APIView):
             employee_id = kwargs.get('employee_id')
             employee = Employee.objects.get(employee_id=employee_id)
             # Check if the employee_id matches between the request and endpoint
-            if request.data['employee_id'] != employee_id:
+            if request.data['employee_id'] != str(employee_id):
                 return Response(status=status.HTTP_400_BAD_REQUEST)
             # Create the instance
-            request.data['employee_id'] = employee_id
             education = EducationSerializer(data=request.data)
             if education.is_valid():
                 # Check permissions

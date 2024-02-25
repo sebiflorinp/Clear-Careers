@@ -12,20 +12,20 @@ class IsEducationOwner(BasePermission):
 
         if request.method == 'POST':
             # Check if the employee_id from the request matches with the user_id from the token
-            if request.data['employee_id'] == user_id:
+            if int(request.data['employee_id']) == user_id:
                 return True
             return False
 
         if request.method == 'PUT':
             education_data = EducationSerializer(education).data
             # Check if the employee_id matches between the education object, request and user_id from the token
-            if education_data['employee_id'] == user_id == request.data['employee_id']:
+            if education_data['employee_id'] == user_id == int(request.data['employee_id']):
                 return True
             return False
 
         if request.method == 'DELETE':
             education_data = EducationSerializer(education).data
             # Check if the user_id of the token matches with the employee_id of the experience object
-            if user_id == education_data['employee_id']:
+            if user_id == int(education_data['employee_id']):
                 return True
             return False
