@@ -1,5 +1,6 @@
 import {Routes, Route, useLocation} from "react-router-dom";
 import LandingPage from "./pages/LandingPage.jsx";
+import SignupPage from "./pages/SignupPage.jsx";
 import NavBar from "./components/NavBar.jsx";
 import SignupPage from "./pages/SignupPage.jsx";
 
