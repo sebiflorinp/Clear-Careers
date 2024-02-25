@@ -9,6 +9,6 @@ def extract_jwt_token(request):
 
 def get_user_id_from_request(request):
     token = extract_jwt_token(request)
-    user_id = jwt.decode(token, verify=False)['user_id']
+    user_id = jwt.decode(token, options={'verify_signature': False}, algorithms=["HS256"])['user_id']
     return user_id
 
