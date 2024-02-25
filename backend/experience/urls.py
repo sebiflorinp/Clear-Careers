@@ -4,5 +4,5 @@ from .views import CreateExperience, UpdateDeleteExperience
 urlpatterns = [
     path('employees/<int:employee_id>/experiences/', CreateExperience.as_view(), name='create-experience'),
     path('employees/<int:employee_id>/experiences/<int:experience_id>', UpdateDeleteExperience.as_view(),
-         name='delete-update-experience')
+         name='update-delete-experience')
 ]

@@ -12,18 +12,18 @@ class IsExperienceOwner(BasePermission):
             return True
 
         if request.method == 'POST':
-            if user_id == request.data['employee_id']:
+            if str(user_id) == request.data['employee_id']:
                 return True
 
         if request.method == 'PUT':
             experience_data = ExperienceSerializer(experience).data
             # Check if the employee_id matches between the request, logged in user and object
-            if experience_data['employee_id'] == user_id == request.data['employee_id']:
+            if experience_data['employee_id'] == user_id == int(request.data['employee_id']):
                 return True
             return False
         if request.method == 'DELETE':
             experience_data = ExperienceSerializer(experience).data
-            if experience_data['employee_id'] == user_id:
+            if int(experience_data['employee_id']) == user_id:
                 return True
             return False
 

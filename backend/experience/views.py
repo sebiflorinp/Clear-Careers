@@ -20,7 +20,7 @@ class CreateExperience(APIView):
             employee_id = kwargs.get('employee_id')
             employee = Employee.objects.get(employee_id=employee_id)
             # Check if the employee_id matches with the one from the request
-            if employee_id != request.data['employee_id']:
+            if str(employee_id) != request.data['employee_id']:
                 return Response(status=status.HTTP_400_BAD_REQUEST)
             # Create the object
             experience = ExperienceSerializer(data=request.data)
@@ -49,7 +49,7 @@ class UpdateDeleteExperience(APIView):
                           .get(experience_id=kwargs.get('experience_id'))
                           )
             # Check if the experience_id from the endpoint matches with the one in the request.
-            if request.data['experience_id'] != kwargs.get('experience_id'):
+            if request.data['experience_id'] != str(kwargs.get('experience_id')):
                 return Response(status=status.HTTP_400_BAD_REQUEST)
             # Check permissions
             self.check_object_permissions(request, experience)
