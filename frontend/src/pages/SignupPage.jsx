@@ -12,15 +12,17 @@ function SignupPage() {
         '4a': <Step title="Experience" active={currentStep === '4a'} description="Something about your experience?" number={4}/>
     }
     return (
-        <div className="bg-neutral-300 h-screen">
-            <div>
-                <div className="bg-neutral-200">
+        <div className="bg-neutral-300 h-screen flex justify-center items-center">
+            <div className="flex min-h-[33rem]">
+                <div className="flex flex-col justify-start items-center gap-14 bg-neutral-200 border-solid border-black border-2 p-9 rounded-l-lg">
                     <h1 className="text-5xl">Sign up</h1>
-                    {Object.entries(stepsToDisplay).map(([key, value]) => {
-                        if (value) {
-                            return steps[key]
-                        }
-                    })}
+                    <div className="flex flex-col gap-4 justify-center items-center min-h-72 min-w-96">
+                        {Object.entries(stepsToDisplay).map(([key, value]) => {
+                            if (value) {
+                                return steps[key]
+                            }
+                        })}
+                    </div>
                 </div>
                 <div className="bg-neutral-100">
                     <div>
