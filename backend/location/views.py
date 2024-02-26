@@ -25,7 +25,7 @@ class CreateLocations(APIView):
                     and len(hqs) == 0):
                 return Response(status=status.HTTP_400_BAD_REQUEST)
             # Check if the employer_id from the request matches with the one from the endpoint
-            if employer_id != request.data['employer_id']:
+            if employer_id != int(request.data['employer_id']):
                 return Response(status=status.HTTP_400_BAD_REQUEST)
             # Create the object
             location = LocationSerializer(data=request.data)
@@ -54,7 +54,7 @@ class UpdateDeleteLocations(APIView):
                         .get(location_id=kwargs.get('location_id'))
                         )
             # Check if the id of the request matches with the id form the endpoint
-            if kwargs.get('location_id') != request.data['location_id']:
+            if kwargs.get('location_id') != int(request.data['location_id']):
                 return Response(status=status.HTTP_400_BAD_REQUEST)
             # Check permissions
             self.check_object_permissions(request, location)
