@@ -12,14 +12,14 @@ class IsPostingOwner(BasePermission):
 
         if request.method == 'POST':
             # Check if the user_id from the token matches the employer_id from the request
-            if user_id == request.data['employer_id']:
+            if user_id == int(request.data['employer_id']):
                 return True
             return False
 
         if request.method == 'PUT':
             posting_data = PostingSerializer(obj).data
             # Check if the user_id from the token matches with the employer_id from the object and request
-            if user_id == posting_data['employer_id'] == request.data['employer_id']:
+            if user_id == posting_data['employer_id'] == int(request.data['employer_id']):
                 return True
             return False
 

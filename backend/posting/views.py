@@ -24,7 +24,7 @@ class CreatePostings(APIView):
 
     def post(self, request, *args, **kwargs):
         # Check if the employer_id from the endpoint matches with the one from the request
-        if request.data['employer_id'] != kwargs.get('employer_id'):
+        if int(request.data['employer_id']) != kwargs.get('employer_id'):
             return Response(status=status.HTTP_400_BAD_REQUEST)
         posting = PostingSerializer(data=request.data)
         # Check permission
@@ -52,7 +52,7 @@ class UpdateDeletePostings(APIView):
                        .get(posting_id=posting_id))
             # Check if the employer_id from the endpoint matches with the one from the request and the posting that
             # will be updated
-            if request.data['employer_id'] != employer_id:
+            if int(request.data['employer_id']) != employer_id:
                 return Response(status=status.HTTP_400_BAD_REQUEST)
             # Check permission
             self.check_object_permissions(request, posting)
