@@ -1,6 +1,7 @@
 import {Routes, Route, useLocation} from "react-router-dom";
 import LandingPage from "./pages/LandingPage.jsx";
 import SignupPage from "./pages/SignupPage.jsx";
+import LoginPage from "./pages/LoginPage.jsx";
 import NavBar from "./components/NavBar.jsx";
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
             <Routes>
                 <Route path="/" element={<LandingPage/>}/>
                 <Route path="/sign-up" element={<SignupPage/>}/>
+                <Route path="/log-in" element={<LoginPage/>}/>
             </Routes>
         </div>
     )
