@@ -26,6 +26,9 @@ function SignupPage() {
                 </div>
                 <div className="bg-neutral-100">
                     <div>
+                        
+                    </div>
+                    <div>
                         <button onClick={() => previousStep()}
                                 className="bg-neutral-300 text-2xl min-w-40 border-2 border-black border-solid rounded-lg hover:scale-105 duration-200 ease-in-out active:bg-neutral-400">
                             Previous

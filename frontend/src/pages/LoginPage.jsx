@@ -1,6 +1,7 @@
 import InputBox from "../components/InputBox.jsx";
-import {useEffect, useState} from "react";
 import Cookies from 'js-cookie'
+import {useState} from "react";
+
 
 
 function LoginPage() {
