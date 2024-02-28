@@ -4,6 +4,36 @@ info:
   version: 1.0.0
   description: A job searching application.
 paths:
+  /api/v1/aplications/{application_id}/:
+    delete:
+      operationId: aplications_destroy
+      parameters:
+      - in: path
+        name: application_id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - aplications
+      security:
+      - jwtAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/v1/applications/:
+    get:
+      operationId: applications_retrieve
+      tags:
+      - applications
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Application'
+          description: ''
   /api/v1/auth/jwt/create/:
     post:
       operationId: auth_jwt_create_create
@@ -694,6 +724,38 @@ paths:
               schema:
                 $ref: '#/components/schemas/Employee'
           description: ''
+  /api/v1/employees/{employee_id}/applications/:
+    post:
+      operationId: employees_applications_create
+      parameters:
+      - in: path
+        name: employee_id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - employees
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Application'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Application'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Application'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Application'
+          description: ''
   /api/v1/employees/{employee_id}/experiences/:
     post:
       operationId: employees_experiences_create
@@ -1069,6 +1131,78 @@ paths:
               schema:
                 $ref: '#/components/schemas/Posting'
           description: ''
+  /api/v1/users/{receiver_id}/notifications/:
+    get:
+      operationId: users_notifications_retrieve
+      parameters:
+      - in: path
+        name: receiver_id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - users
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Notification'
+          description: ''
+    post:
+      operationId: users_notifications_create
+      parameters:
+      - in: path
+        name: receiver_id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - users
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Notification'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Notification'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Notification'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Notification'
+          description: ''
+  /api/v1/users/{receiver_id}/notifications/{notification_id}/:
+    delete:
+      operationId: users_notifications_destroy
+      parameters:
+      - in: path
+        name: notification_id
+        schema:
+          type: integer
+        required: true
+      - in: path
+        name: receiver_id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - users
+      security:
+      - jwtAuth: []
+      responses:
+        '204':
+          description: No response body
 components:
   schemas:
     Activation:
@@ -1081,6 +1215,26 @@ components:
       required:
       - token
       - uid
+    Application:
+      type: object
+      properties:
+        application_id:
+          type: integer
+          readOnly: true
+        date:
+          type: string
+          format: date-time
+        employee_id:
+          type: integer
+        employer_id:
+          type: integer
+        posting_id:
+          type: integer
+      required:
+      - application_id
+      - employee_id
+      - employer_id
+      - posting_id
     BlankEnum:
       enum:
       - ''
@@ -1295,6 +1449,24 @@ components:
       - employer_id
       - location_id
       - street
+    Notification:
+      type: object
+      properties:
+        notification_id:
+          type: integer
+          readOnly: true
+        description:
+          type: string
+          maxLength: 1000
+        created_at:
+          type: string
+          format: date-time
+        receiver_id:
+          type: integer
+      required:
+      - description
+      - notification_id
+      - receiver_id
     PasswordResetConfirm:
       type: object
       properties:

@@ -11,6 +11,7 @@ from authentication.models import User, Employer, Employee
 
 
 class ListApplications(APIView):
+    serializer_class = ApplicationSerializer
     authentication_classes = [JWTAuthentication]
     permission_classes = [IsAuthenticated]
 
@@ -21,6 +22,7 @@ class ListApplications(APIView):
 
 
 class CreateApplications(APIView):
+    serializer_class = ApplicationSerializer
     authentication_classes = [JWTAuthentication]
     permission_classes = [IsAuthenticated, IsApplicationOwnerOrReceiver]
 
@@ -54,6 +56,7 @@ class CreateApplications(APIView):
 
 
 class DeleteApplications(APIView):
+    serializer_class = ApplicationSerializer
     authentication_classes = [JWTAuthentication]
     permission_classes = [IsAuthenticated, IsApplicationOwnerOrReceiver]
 

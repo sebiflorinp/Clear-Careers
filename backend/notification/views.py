@@ -10,6 +10,7 @@ from notification.serializers import NotificationSerializer
 
 
 class CreateListNotifications(APIView):
+    serializer_class = NotificationSerializer
     authentication_classes = [JWTAuthentication]
     permission_classes = [IsAuthenticated, IsNotificationReceiver]
 
@@ -41,6 +42,7 @@ class CreateListNotifications(APIView):
 
 
 class DeleteNotifications(APIView):
+    serializer_class = NotificationSerializer
     authentication_classes = [JWTAuthentication]
     permission_classes = [IsAuthenticated, IsNotificationReceiver]
 
