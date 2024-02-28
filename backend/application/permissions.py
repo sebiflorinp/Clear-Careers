@@ -9,13 +9,13 @@ class IsApplicationOwnerOrReceiver(BasePermission):
 
         if request.method == 'POST':
             # Check if the user_id from the token matches with the employer_id from the request
-            if user_id == request.data['employee_id']:
+            if user_id == int(request.data['employee_id']):
                 return True
             return False
 
         if request.method == 'DELETE':
             # Check if the user_id from the token matches with the employer_id from the object
             application_data = ApplicationSerializer(obj).data
-            if user_id == application_data['employer_id'] or user_id == application_data['employee_id']:
+            if user_id == int(application_data['employer_id']) or user_id == int(application_data['employee_id']):
                 return True
             return False
