@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'location',
     'posting',
     'application',
+    'notification',
 
     'rest_framework',
     'rest_framework.authtoken',
